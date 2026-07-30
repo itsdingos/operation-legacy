@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c6twcd7p0p4hl"]
+
+[ext_resource type="PackedScene" uid="uid://djkcuxu8v6kd5" path="res://objects/soldier/soldier.tscn" id="1_5y7ac"]
+
+[node name="Enemy" unique_id=75234459 instance=ExtResource("1_5y7ac")]
+controller_type = 3

@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://djkcuxu8v6kd5"]
+
+[ext_resource type="Script" uid="uid://dyw0seer5fq1k" path="res://objects/soldier/soldier.gd" id="1_oixgj"]
+[ext_resource type="PackedScene" uid="uid://d0l3w108yhe7l" path="res://objects/gun/gun.tscn" id="2_1ok1j"]
+[ext_resource type="Script" uid="uid://7ixtb6sfm3wg" path="res://scripts/utils/state_machine/state_machine.gd" id="2_yrtfe"]
+[ext_resource type="Script" uid="uid://eqrhlw7ek550" path="res://scripts/utils/hurtbox.gd" id="3_saknv"]
+[ext_resource type="Script" uid="uid://djmu076sb8yyy" path="res://objects/soldier/states/stand.gd" id="4_lxyqk"]
+[ext_resource type="Script" uid="uid://b5p6rervab1wx" path="res://objects/soldier/states/fall.gd" id="5_dsnea"]
+[ext_resource type="Script" uid="uid://c7501x2entx77" path="res://objects/soldier/states/jump.gd" id="6_dsnea"]
+[ext_resource type="Script" uid="uid://crjdd4w5n0i3j" path="res://objects/soldier/states/crouch.gd" id="6_hy68d"]
+[ext_resource type="Script" uid="uid://b4n81fu4deh6c" path="res://objects/soldier/states/hang.gd" id="7_1h75m"]
+[ext_resource type="Script" uid="uid://dx25vr2g3mnbc" path="res://objects/soldier/states/wall_jump.gd" id="8_hy68d"]
+[ext_resource type="Script" uid="uid://ddx7somu3b3gd" path="res://objects/soldier/states/hurt.gd" id="11_6mu8c"]
+[ext_resource type="Script" uid="uid://bovj8gm7pric7" path="res://objects/soldier/states/dead.gd" id="12_6mu8c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsnea"]
+size = Vector2(14, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hy68d"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mu8c"]
+size = Vector2(16, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7o2qs"]
+size = Vector2(16, 14)
+
+[node name="Soldier" type="CharacterBody2D" unique_id=75234459]
+collision_layer = 2
+floor_snap_length = 4.0
+script = ExtResource("1_oixgj")
+base_lookahead_distance = 32.0
+ledge_grab_forward_offset = Vector2(0, -24)
+
+[node name="Label" type="Label" parent="." unique_id=1867573427]
+offset_left = -20.0
+offset_top = -47.0
+offset_right = 20.0
+offset_bottom = -24.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=111959065]
+show_behind_parent = true
+offset_left = -8.0
+offset_top = -24.0
+offset_right = 8.0
+pivot_offset = Vector2(8, 24)
+color = Color(0.070199974, 0.47241995, 0.78, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=514301077]
+show_behind_parent = true
+centered = false
+offset = Vector2(-8, -32)
+
+[node name="Gun" parent="." unique_id=1615054986 instance=ExtResource("2_1ok1j")]
+position = Vector2(0, -11)
+
+[node name="CollisionStand" type="CollisionShape2D" parent="." unique_id=2137769389]
+visible = false
+position = Vector2(0, -11.5)
+shape = SubResource("RectangleShape2D_dsnea")
+
+[node name="CollisionCrouch" type="CollisionShape2D" parent="." unique_id=1570991501]
+visible = false
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_hy68d")
+disabled = true
+
+[node name="HurtboxStand" type="Node2D" parent="." unique_id=1884898222 node_paths=PackedStringArray("owner_ref")]
+position = Vector2(0, -12)
+script = ExtResource("3_saknv")
+owner_ref = NodePath("..")
+shape = SubResource("RectangleShape2D_6mu8c")
+metadata/_custom_type_script = "uid://eqrhlw7ek550"
+
+[node name="HurtboxCrouch" type="Node2D" parent="." unique_id=937869607 node_paths=PackedStringArray("owner_ref")]
+position = Vector2(0, -7)
+script = ExtResource("3_saknv")
+disabled = true
+owner_ref = NodePath("..")
+shape = SubResource("RectangleShape2D_7o2qs")
+metadata/_custom_type_script = "uid://eqrhlw7ek550"
+
+[node name="StateMachine" type="Node" parent="." unique_id=145615360 node_paths=PackedStringArray("initial_state", "debug_label")]
+script = ExtResource("2_yrtfe")
+initial_state = NodePath("stand")
+debug_label = NodePath("../Label")
+metadata/_custom_type_script = "uid://7ixtb6sfm3wg"
+
+[node name="stand" type="Node" parent="StateMachine" unique_id=1847743473]
+script = ExtResource("4_lxyqk")
+metadata/_custom_type_script = "uid://ci6ls1d8mpdin"
+
+[node name="crouch" type="Node" parent="StateMachine" unique_id=1366612791]
+script = ExtResource("6_hy68d")
+metadata/_custom_type_script = "uid://ci6ls1d8mpdin"
+
+[node name="fall" type="Node" parent="StateMachine" unique_id=1269744023]
+script = ExtResource("5_dsnea")
+metadata/_custom_type_script = "uid://ci6ls1d8mpdin"
+
+[node name="jump" type="Node" parent="StateMachine" unique_id=1769087035]
+script = ExtResource("6_dsnea")
+metadata/_custom_type_script = "uid://ci6ls1d8mpdin"
+
+[node name="hang" type="Node" parent="StateMachine" unique_id=1347696527]
+script = ExtResource("7_1h75m")
+
+[node name="wall_jump" type="Node" parent="StateMachine" unique_id=809590422]
+script = ExtResource("8_hy68d")
+
+[node name="hurt" type="Node" parent="StateMachine" unique_id=1638903168]
+script = ExtResource("11_6mu8c")
+metadata/_custom_type_script = "uid://ci6ls1d8mpdin"
+
+[node name="dead" type="Node" parent="StateMachine" unique_id=1809842337]
+script = ExtResource("12_6mu8c")
+metadata/_custom_type_script = "uid://ci6ls1d8mpdin"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SurfaceData" format=3 uid="uid://c5hrc58y4a3al"]
+
+[ext_resource type="Script" uid="uid://bespcfunj5hl4" path="res://scripts/utils/surface_data.gd" id="1_t3cpr"]
+
+[resource]
+script = ExtResource("1_t3cpr")
+friction = 1.5
+acceleration = 0.4
+max_speed = 0.6
+traction = 0.3
+slide_force = 1.1
+metadata/_custom_type_script = "uid://bespcfunj5hl4"

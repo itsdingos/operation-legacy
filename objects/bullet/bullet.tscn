@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://lrl40y6jmjdb"]
+
+[ext_resource type="Script" uid="uid://dq1iuqav2ieyx" path="res://objects/bullet/bullet.gd" id="1_k1njs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ofkrt"]
+size = Vector2(4, 4)
+
+[node name="Bullet" type="Node2D" unique_id=82591023]
+script = ExtResource("1_k1njs")
+hitbox = SubResource("RectangleShape2D_ofkrt")
+collision_mask = 5
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=321947764]
+show_behind_parent = true
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true

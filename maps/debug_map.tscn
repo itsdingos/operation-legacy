@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://dib18bcsrl5s6"]
+
+[ext_resource type="Script" uid="uid://b0vmg60tvaiye" path="res://scripts/utils/level_settings.gd" id="1_gbpn1"]
+[ext_resource type="PackedScene" uid="uid://irwalmip37ph" path="res://objects/player/player_soldier.tscn" id="1_yhms4"]
+[ext_resource type="Resource" uid="uid://dqh6ro4wukin3" path="res://definitions/surfaces/ice_surface.tres" id="2_pbrs2"]
+[ext_resource type="Resource" uid="uid://cn1kxcute007o" path="res://definitions/surfaces/default.tres" id="2_phgvc"]
+[ext_resource type="Resource" uid="uid://c5hrc58y4a3al" path="res://definitions/surfaces/mud_surface.tres" id="3_mxpld"]
+[ext_resource type="PackedScene" uid="uid://c6twcd7p0p4hl" path="res://objects/enemy/enemy.tscn" id="5_qkt71"]
+
+[sub_resource type="GDScript" id="GDScript_mxpld"]
+script/source = "extends Area2D
+
+var damage_data := DamageData.create()
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Soldier:
+		body.take_damage(damage_data)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkt71"]
+size = Vector2(2816, 48)
+
+[node name="debug_map" type="Node2D" unique_id=1065211927]
+script = ExtResource("1_gbpn1")
+world_size = Vector2i(2816, 384)
+metadata/_custom_type_script = "uid://b0vmg60tvaiye"
+
+[node name="Default Surface" type="StaticBody2D" parent="." unique_id=178811312]
+show_behind_parent = true
+position = Vector2(168, 336)
+metadata/_edit_group_ = true
+metadata/surface = ExtResource("2_phgvc")
+
+[node name="Polygon2D" type="Polygon2D" parent="Default Surface" unique_id=798456939]
+polygon = PackedVector2Array(-168, -16, 24, -16, 88, -40, 152, -16, 216, -16, 216, -40, 248, -40, 248, -96, 280, -96, 280, -56, 304, -56, 304, -16, 344, -16, 408, -40, 480, -40, 480, -72, 520, -72, 520, 48, -168, 48)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Default Surface" unique_id=818537271]
+position = Vector2(592, -104)
+polygon = PackedVector2Array(-168, 24, -144, 24, -144, -136, -72, -136, -72, -24, -80, -24, -80, -16, -72, -16, -72, 16, -128, 16, -128, 48, -168, 48)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Default Surface" unique_id=1977535202]
+position = Vector2(720, 8)
+polygon = PackedVector2Array(-176, 40, -176, -104, -168, -104, -168, -112, -176, -112, -176, -152, 72, -152, 264, -24, 264, 40)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Default Surface" unique_id=1890194271]
+polygon = PackedVector2Array(-168, -16, 24, -16, 88, -40, 152, -16, 216, -16, 216, -40, 248, -40, 248, -96, 280, -96, 280, -56, 304, -56, 304, -16, 344, -16, 408, -40, 480, -40, 480, -72, 520, -72, 520, 48, -192, 48, -192, -232, -168, -232)
+metadata/surface = ExtResource("2_phgvc")
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Default Surface" unique_id=577867485]
+position = Vector2(712, 0)
+polygon = PackedVector2Array(-168, -96, -160, -96, -160, -104, -168, -104, -168, -144, 80, -144, 272, -16, 272, 48, -168, 48)
+metadata/surface = ExtResource("2_phgvc")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Default Surface" unique_id=1923507091]
+polygon = PackedVector2Array(424, -56, 464, -56, 464, -88, 520, -88, 520, -120, 512, -120, 512, -128, 520, -128, 520, -240, 448, -240, 448, -80, 424, -80)
+
+[node name="Icy Surface" type="StaticBody2D" parent="." unique_id=406116413]
+show_behind_parent = true
+metadata/surface = ExtResource("2_pbrs2")
+
+[node name="Polygon2D" type="Polygon2D" parent="Icy Surface" unique_id=1978635734]
+position = Vector2(1384, 336)
+color = Color(0.43, 0.8575, 1, 1)
+polygon = PackedVector2Array(-168, -16, 24, -16, 96, -40, 464, 48, -168, 48)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Icy Surface" unique_id=1456298396]
+polygon = PackedVector2Array(1216, 320, 1216, 384, 1848, 384, 1480, 296, 1408, 320)
+
+[node name="Muddy Surface" type="StaticBody2D" parent="." unique_id=496721257]
+show_behind_parent = true
+position = Vector2(0, 1)
+metadata/surface = ExtResource("3_mxpld")
+
+[node name="Polygon2D" type="Polygon2D" parent="Muddy Surface" unique_id=1033064997]
+position = Vector2(2104, 335)
+color = Color(0.34, 0.25296, 0.1768, 1)
+polygon = PackedVector2Array(-168, -16, 16, -16, 96, -40, 464, 48, -168, 48)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Muddy Surface" unique_id=1501811481]
+position = Vector2(720, 0)
+polygon = PackedVector2Array(1216, 319, 1216, 383, 1848, 383, 1480, 295, 1400, 319)
+
+[node name="Enemy" parent="." unique_id=75234459 instance=ExtResource("5_qkt71")]
+show_behind_parent = true
+position = Vector2(104, 320)
+
+[node name="PlayerSoldier" parent="." unique_id=1432134991 instance=ExtResource("1_yhms4")]
+show_behind_parent = true
+position = Vector2(32, 320)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=813194598]
+show_behind_parent = true
+position = Vector2(8, 392)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = SubResource("GDScript_mxpld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=272538673]
+position = Vector2(1400, 16)
+shape = SubResource("RectangleShape2D_qkt71")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

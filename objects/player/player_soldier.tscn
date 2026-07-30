@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://irwalmip37ph"]
+
+[ext_resource type="PackedScene" uid="uid://djkcuxu8v6kd5" path="res://objects/soldier/soldier.tscn" id="1_jlymo"]
+
+[node name="PlayerSoldier" unique_id=75234459 instance=ExtResource("1_jlymo")]
+controller_type = 1

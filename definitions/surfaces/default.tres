@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SurfaceData" format=3 uid="uid://cn1kxcute007o"]
+
+[ext_resource type="Script" uid="uid://bespcfunj5hl4" path="res://scripts/utils/surface_data.gd" id="1_iindj"]
+
+[resource]
+script = ExtResource("1_iindj")
+slide_force = 1.5
+metadata/_custom_type_script = "uid://bespcfunj5hl4"
